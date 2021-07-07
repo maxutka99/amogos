@@ -10,7 +10,7 @@ If you wan't to test error handler type this command:
 ```
 test2
 ```
-It will cause Divide By Zero exception
+It will cause Invalid Opcode exception
 
 # Credits
 Shell part: github.com/Neetx/osdevTraining

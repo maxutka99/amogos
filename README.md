@@ -5,6 +5,12 @@ An operating system that i developing just for fun
 
 ```make all```
 
+# Also...
+If you wan't to test error handler type this command:
+```
+test2
+```
+It will cause Divide By Zero exception
 
 # Credits
 Shell part: github.com/Neetx/osdevTraining

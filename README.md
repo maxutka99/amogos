@@ -1,2 +1,6 @@
-# amogkernel
-A kernel that i developing just for fun
+# AmogOS
+An operating system that i developing just for fun
+
+# How to run?
+
+```make all``

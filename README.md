@@ -12,6 +12,10 @@ test2
 ```
 It will cause Invalid Opcode exception
 
+# System parts
+Initialization system - AIS (Amogos Initialization System)
+Shell- AShell
+
 # Credits
 Shell part: github.com/Neetx/osdevTraining
 TTY and Bootloader: OSDev Barebones Tutorial

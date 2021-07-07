@@ -1,7 +1,10 @@
-#include "../drivers/tty.h"
-
+#include <stddef.h>
+#include "../drivers/tty.c"
+#include "../lib/memory.h"
 static uint32_t idt_location = 0;
-
+extern uint32_t kernel_end = 0;
+extern uint32_t kernel_base = 0;
+/* Required Declarations */
 void idt_register_interrupt(uint8_t i, uint32_t callback)
 {
 	
@@ -14,18 +17,19 @@ void idt_register_interrupt(uint8_t i, uint32_t callback)
 	return;
 }
 
-void exceptionhn(){
-    terminal_writecolour("\n\n   AmogOS ", 10);
-    terminal_writecolour("found an ", 7);
-    terminal_writecolour("error", 12);
-    terminal_writecolour("! Please reboot.\n\n", 7);
+void ExceptionHandler(){
+	terminal_writestring("\n\nkernel panic: exception occured; cannot handle\n\n");
+    asm("hlt");
 }
-
 void startAIS(){
     terminal_writecolour("\n\n   AIS", 10);
     terminal_writecolour(" 0.1 ", 11);
     terminal_writecolour("is starting up AmogOS\n\n", 7);
-    terminal_writecolour(" * ", 10);
+    terminal_writecolour("\n * ", 10);
+    terminal_writecolour("Memory init sequnce: ", 15);
+    mm_init(&kernel_end);
+    terminal_writestring(" finished"); 
+    terminal_writecolour("\n * ", 10);
     terminal_writecolour("Terminal already initialized:", 15); 
     terminal_writestring(" skipping...\n");
     terminal_writecolour(" * ", 10);
@@ -35,13 +39,12 @@ void startAIS(){
     int i;
     for (i = 1; i < 15; ++i)
     {
-        idt_register_interrupt(i, (uint32_t)exceptionhn);
+        idt_register_interrupt(i, (uint32_t)ExceptionHandler);
     }
-    
-    terminal_writestring(" finished...\n");
-    terminal_writecolour(" * ", 10);
+    terminal_writestring(" finished...");
+    terminal_writecolour("\n * ", 10);
     terminal_writecolour("AmogOS (i386) 0.1 is ready for usage! ", 15); 
     terminal_writecolour("\n\nroot@amogos ", 10);
-    terminal_writecolour("$ ", 11);
+    terminal_writecolour("$ ", 9);
     terminal_writecolour("", 15);
 }

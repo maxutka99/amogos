@@ -5,7 +5,8 @@
 #include "tty.h"
 #include "../devices/keyboard.c"
 #include <string.h>
-#include "../lib/memset.c"
+#include "../lib/memory.c"
+
 
 size_t strlen(const char* str) 
 {
@@ -99,7 +100,7 @@ uint8_t i=0;
   int flag = 0;
   char temp = 0;
   memset(string,0,len);
-  while(i<len && temp != 0x0D){
+  while(i<255 && temp != 0x0D){
     temp = getchar();
     if(isascii(temp) && temp != 0x0D){ //0x0D is ENTER
       if(temp == 0x08){   //backspace

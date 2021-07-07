@@ -35,7 +35,7 @@ int strcmp(const char *str1, const char *str2){
 
 void PrintShell(){
         terminal_writecolour("\nroot@amogos ", 10);
-    terminal_writecolour("$ ", 11);
+    terminal_writecolour("$ ", 9);
     terminal_writecolour("", 15);
 }
 

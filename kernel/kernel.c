@@ -1,6 +1,7 @@
-#include "drivers/tty.c"
-#include "initialization/ais.c"
 
+#include "initialization/ais.c"
+#include <string.h>
+#include "lib/memory.h"
 /*
                 S U S KERNEL
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀
@@ -29,7 +30,6 @@ Based on: OSDev wiki Bare Bones tutorial
 */
 
 
-
 int get_command(){
   int cmd = 1;
   char string[10];
@@ -39,6 +39,9 @@ int get_command(){
   terminal_writestring("\n");
   return cmd;
 }
+
+
+
 
 void execute_command(const char* cmd1){
   if(strcmp(cmd1,"reboot\x0D")==1){
@@ -65,6 +68,13 @@ void execute_command(const char* cmd1){
   else if(strcmp(cmd1,"clear\x0D")==1){
       terminal_initialize();
   }
+  else if(strcmp(cmd1,"memory\x0D")==1){
+      mm_print_out();
+  }
+  else if(StartsWith("mlc", cmd1)==1){
+   malloc(1000);
+   terminal_writestring("\n\nAllocated 1000 bytes\n\n");
+  }
   else if(strcmp(cmd1,"test2\x0D")==1){
       int a = 100;
       int b = a / 0;
@@ -72,7 +82,7 @@ void execute_command(const char* cmd1){
       terminal_writestring("\n");
       terminal_writestring(c);
   }
-  else{
+  else{ 
     terminal_writestring("\nash: unknown command");
   }
   PrintShell();
@@ -80,7 +90,7 @@ void execute_command(const char* cmd1){
 }
 
 
-void kernel_main(void) 
+void kernel_main(void* magic) 
 {
 	/* Initialize terminal interface */
 	terminal_initialize();
@@ -88,6 +98,9 @@ void kernel_main(void)
 	/* Newline support is left as an exercise. */
 	terminal_writestring(" AmogKernel v1\n");
     terminal_writestring(" :: starting AIS\n");
+    terminal_writestring(" :: magic number: ");
+    terminal_writestring(magic);
+    terminal_writestring("\n");
     startAIS();
     get_command();
 }

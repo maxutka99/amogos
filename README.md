@@ -17,6 +17,13 @@ Initialization system - AIS (Amogos Initialization System)
 <br />
 Shell- AShell
 
+# 👍 Features
+- Most sussy kernel
+- Memory manager (will be released in 0.2)
+- Mini-shell
+- Exception handler
+- Amogus Initialization System
+
 # 📚 Credits
 
 Shell part: github.com/Neetx/osdevTraining

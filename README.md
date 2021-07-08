@@ -4,6 +4,8 @@
 # ❓ How to run?
 
 ```make all```
+Warning: Cannot be compiled on termux
+
 
 # ❗️ Also...
 If you wan't to test error handler type this command:
